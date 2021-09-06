@@ -1,8 +1,12 @@
 - [:green_apple: BASIC JS](#-green-apple--basic-js)
   * [:high_brightness: I.Variable and Scope](#-high-brightness--ivariable-and-scope)
     + [1.let,const,var](#1let-const-var)
+  * [:red_circle: II.BASIC TOPIC](#-red-circle--iibasic-topic)
+    + [2.1 Data Type](#21-data-type)
+    + [2.2 Object](#22-object)
+    + [2.3 Function](#23-function)
+    + [2.4 String method](#24-string-method)
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 # :green_apple: BASIC JS
 
@@ -141,13 +145,13 @@ or
 objectName["propertyName"];
 ```
 
-## 2.3 Function
+### 2.3 Function
 
 - Definition: <br>
 - A JavaScript function is a block of code designed to perform a particular task.
 - A JavaScript function is executed when "something" invokes it (calls it).
 
-## 2.4 String method
+### 2.4 String method
 
 - Extracting String Parts :bread:(3 Methods):
 - slice(start, end) :wrench:
