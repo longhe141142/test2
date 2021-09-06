@@ -34,6 +34,19 @@ let x1 = 34.0; // Written with decimals
 let x2 = 34; // Written without decimals
 ```
 
+- Type conversion:
+- Rule:<br>
+  String with number or number with number work with operands **- \* /** then result is a number<br>
+  **EXCEPT "+"**
+
+```javascript
+2 * "3" // 6
+6 / "2" // 3
+3 - "1" // 2
+
+3 + "3" // "33" :x:
+```
+
 - Booleans:<br>
   Booleans can only have two values: `true` or `false`
 
@@ -51,3 +64,4 @@ let z = 6;
   - Conversion rules:
   - Values that are intuitively “empty”, like 0, an empty string, null, undefined, and NaN, become `false`
   - Other values become `true`
+    :heavy_exclamation_mark: **Please note: the string with zero `"0"` is `true`**
