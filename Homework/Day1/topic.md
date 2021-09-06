@@ -36,26 +36,26 @@ let x2 = 34; // Written without decimals
 
 - Type conversion:
 - Rule:<br>
-  String with number or number with number work with operands "**- \* /**"  then result is a number<br>
+  String with number or number with number work with operands "**- \* /**" then result is a number<br>
   **EXCEPT "+"**
   <br>
 
-
 ```javascript
-2 * "3" // 6
-6 / "2" // 3
-3 - "1" // 2
+2 * "3"; // 6
+6 / "2"; // 3
+3 - "1"; // 2
 
-3 + "3" // "33" :x:
-```
-In arithmetic expressions, ```boolean```, ```null``` and ```undefined``` convert to a numbers as following:
-```javascript
-1 + true      // true becomes 1, result is 2
-1 + false     // false becomes 0, result is 1
-1 + null     // null becomes 0, result is 1
-1 + undefined // undefined becomes NaN, result is NaN
+3 + "3"; // "33" :x:
 ```
 
+In arithmetic expressions, `boolean`, `null` and `undefined` convert to a numbers as following:
+
+```javascript
+1 + true; // true becomes 1, result is 2
+1 + false; // false becomes 0, result is 1
+1 + null; // null becomes 0, result is 1
+1 + undefined; // undefined becomes NaN, result is NaN
+```
 
 - **Booleans:**<br>
   Booleans can only have two values: `true` or `false`
@@ -71,7 +71,38 @@ let z = 6;
 ```
 
 - Type conversion:
+
   - Conversion rules:
   - Values that are intuitively “empty”, like 0, an empty string, null, undefined, and NaN, become `false`
   - Other values become `true`<br>
     :heavy_exclamation_mark: **Please note: the string with zero `"0"` is `true`**
+
+- **Objects**<br>
+  JavaScript objects are written with curly braces `{}`.<br>
+  Object properties are written as name:value pairs, separated by commas.
+
+```javascript
+const person = {
+  firstName: "John",
+  lastName: "Doe",
+  age: 50,
+  eyeColor: "blue",
+};
+```
+
+- **Undefined**<br>
+In JavaScript, a variable without a value, has the value ```undefined```. The type is also ```undefined```.
+
+```javascript
+let car;    // Value is undefined, type is undefined
+```
+- **Empty Values**<br>
+An empty value has nothing to do with undefined.<br>
+An empty string has both a legal value and a type.
+```javascript
+let car = "";    // The value is "", the typeof is "string"
+
+```
+
+
+ 
