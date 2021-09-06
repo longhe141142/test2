@@ -1,4 +1,8 @@
-[You can use numbers for reference-style link definitions][1]
+- [:green_apple: BASIC JS](#-green-apple--basic-js)
+  * [:high_brightness: I.Variable and Scope](#-high-brightness--ivariable-and-scope)
+    + [1.let,const,var](#1let-const-var)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 # :green_apple: BASIC JS
 
