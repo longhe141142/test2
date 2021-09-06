@@ -125,12 +125,12 @@ const car = { type: "Fiat", model: "500", color: "white" };
 - Accessing Object Properties:<br>
 - _Two way:_
 
-```javascript
+ - ```javascript
 objectName.propertyName;
 ```
 
 or
 
-- ```javascript
+  - ```javascript
   objectName["propertyName"];
-  ```
+  ``` 
