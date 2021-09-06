@@ -31,11 +31,7 @@ let x1 = 34.0; // Written with decimals
 let x2 = 34; // Written without decimals
 ```
 - Booleans:<br>
-Booleans can only have two values: ```javascript
- true ```  or
- ```javascript 
- false```
-
+Booleans can only have two values: ```true``` or ```false```
 ```javascript
 let x = 5;
 let y = 5;
@@ -45,3 +41,8 @@ let z = 6;
   x == z
 ); // Returns false
 ```
+  - Type conversion: 
+   - Conversion rules:
+    - Values that are intuitively “empty”, like 0, an empty string, null, undefined, and NaN, become ```false.```
+    - Other values become ```true```
+
