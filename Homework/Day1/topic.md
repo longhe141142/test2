@@ -63,5 +63,5 @@ let z = 6;
 - Type conversion:
   - Conversion rules:
   - Values that are intuitively “empty”, like 0, an empty string, null, undefined, and NaN, become `false`
-  - Other values become `true`<break>
+  - Other values become `true`<br>
     :heavy_exclamation_mark: **Please note: the string with zero `"0"` is `true`**
