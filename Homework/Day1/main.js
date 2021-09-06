@@ -8,7 +8,7 @@ const { calcSumOfArray } = require("./calcSumOfArray.js");
 const { quickSort } = require("./sortArr");
 const { getNumberUniqueChar } = require('./stringMethod')
 const { getObjAttr } = require("./getObjAttribute")
-
+const { resolveJSONOutput } = require("./JSON EXERCISE/JSONMachine")
 const main = () => {
   //   3.1 concatString.js
   console.log(`===================3.1===================`);
@@ -81,6 +81,25 @@ var product = {
 getObjAttr(product,"keyValuePairs")
 getObjAttr(product,"values")
 getObjAttr(product,"keys")
+//   3.6 - 3.7  PATH:"./JSON EXERCISE/JSONMachine.js"
+
+var jsonData = [
+  { id: 1, parentId: null, name: "Root 1" },
+  { id: 2, parentId: 1, name: "Child Root 1 1" },
+  { id: 3, parentId: null, name: "Root 2" },
+  { id: 5, parentId: 3, name: "Child Root 2" },
+  { id: 6, parentId: 7, name: "Child of Child Root 2" },
+  { id: 7, parentId: 5, name: "Child of Child Root 2" },
+  { id: 8, parentId: 2, name: "Child of Child Root 1 1" },
+  { id: 9, parentId: null, name: "Root 2" },
+  { id: 10, parentId: 1, name: "Child Root 1 2" },
+  { id: 11, parentId: 2, name: "Child Root 1 2" },
+];
+
+resolveJSONOutput(jsonData)
 };
+
+
+
 
 main();
