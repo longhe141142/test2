@@ -126,11 +126,11 @@ const car = { type: "Fiat", model: "500", color: "white" };
 - _Two way:_
 
  - ```javascript
-objectName.propertyName;
-```
+    objectName.propertyName;
+   ```
 
 or
 
   - ```javascript
-  objectName["propertyName"];
-  ``` 
+     objectName["propertyName"];
+    ``` 
