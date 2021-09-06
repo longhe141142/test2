@@ -15,7 +15,7 @@
 ### 2.1 Data Type
 
 - The basic types of JS :
-- String:<br>
+- **String:**<br>
   A string (or a text string) is a series of characters like "John Doe".
   Strings are written with quotes. You can use single or double quotes:
   _Like this:_
@@ -25,7 +25,7 @@ let carName1 = "Volvo XC60"; // Using double quotes
 let carName2 = "Volvo XC60"; // Using single quotes
 ```
 
-- Numbers:<br>
+- **Numbers:**<br>
   JavaScript has only one type of numbers.<br>
   Numbers can be written with, or without decimals:
 
@@ -38,6 +38,8 @@ let x2 = 34; // Written without decimals
 - Rule:<br>
   String with number or number with number work with operands "**- \* /**"  then result is a number<br>
   **EXCEPT "+"**
+  <br>
+
 
 ```javascript
 2 * "3" // 6
@@ -46,8 +48,16 @@ let x2 = 34; // Written without decimals
 
 3 + "3" // "33" :x:
 ```
+In arithmetic expressions, ```boolean```, ```null``` and ```undefined``` convert to a numbers as following:
+```javascript
+1 + true      // true becomes 1, result is 2
+1 + false     // false becomes 0, result is 1
+1 + null     // null becomes 0, result is 1
+1 + undefined // undefined becomes NaN, result is NaN
+```
 
-- Booleans:<br>
+
+- **Booleans:**<br>
   Booleans can only have two values: `true` or `false`
 
 ```javascript
