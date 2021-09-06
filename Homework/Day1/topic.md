@@ -154,6 +154,59 @@ objectName["propertyName"];
   Ex:
 
 ```javascript
-let str = "Apple, Banana, Kiwi"; :hammer:
+let str = "Apple, Banana, Kiwi";
 str.slice(7, 13); // Returns Banana
 ```
+
+_Remember:If a parameter is negative, the position is counted from the end of the string._
+Ex:This example slices out a portion of a string from position -12 to position -6:
+
+```javascript
+let str = "Apple, Banana, Kiwi";
+str.slice(-12, -6); // Returns Banana
+```
+
+_If you omit the second parameter, the method will slice out the rest of the string or, counting from the end:_
+
+```javascript
+str.slice(7); // Returns Banana,Kiwi
+str.slice(-12); // Returns Banana,Kiwi
+```
+- **The substring() Method**
+- ```substring()``` is similar to ```slice()```.<br>
+The difference is that ```substring()``` cannot accept negative indexes.
+Ex:
+```javascript
+let str = "Apple, Banana, Kiwi";
+substring(7, 13)    // Returns Banana
+```
+- **The substr() Method**
+- ```substr()``` is similar to ```slice()```.
+- The difference is that the second parameter specifies the length of the extracted part.
+Ex:
+```javascript
+let str = "Apple, Banana, Kiwi";
+str.substr(7, 6)    // Returns Banana
+```
+
+- **Replacing String Content**
+- The ```replace()``` method replaces a specified value with another value in a string:
+Ex:
+```javascript
+let text = "Please visit Microsoft and Microsoft!";
+let newText = text.replace("Microsoft", "W3Schools");
+```
+Can use with regular expression:
+
+```javascript
+let text = "Please visit Microsoft and Microsoft!";
+let newText = text.replace(/MICROSOFT/i, "W3Schools");
+```
+- **Other Methods:**
+  - ```toUpperCase()```
+  - ```toLowerCase()```
+  - ```concat()```
+  - ```String.trim()```
+  - ```charAt()```
+  - ```charCodeAt()```
+
