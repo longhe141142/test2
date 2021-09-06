@@ -1,3 +1,5 @@
+[You can use numbers for reference-style link definitions][1]
+
 # :green_apple: BASIC JS
 
 ## :high_brightness: I.Variable and Scope
