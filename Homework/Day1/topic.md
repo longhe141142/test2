@@ -36,7 +36,7 @@ let x2 = 34; // Written without decimals
 
 - Type conversion:
 - Rule:<br>
-  String with number or number with number work with operands **- \* /** then result is a number<br>
+  String with number or number with number work with operands  **- \* /**  then result is a number<br>
   **EXCEPT "+"**
 
 ```javascript
