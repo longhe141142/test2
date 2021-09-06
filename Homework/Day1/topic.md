@@ -16,22 +16,27 @@
 
 - The basic types of JS :
 - String:<br>
-    A string (or a text string) is a series of characters like "John Doe".
-    Strings are written with quotes. You can use single or double quotes:
-    _Like this:_
+  A string (or a text string) is a series of characters like "John Doe".
+  Strings are written with quotes. You can use single or double quotes:
+  _Like this:_
+
 ```javascript
 let carName1 = "Volvo XC60"; // Using double quotes
 let carName2 = "Volvo XC60"; // Using single quotes
 ```
+
 - Numbers:<br>
-JavaScript has only one type of numbers.<br>
-Numbers can be written with, or without decimals:
+  JavaScript has only one type of numbers.<br>
+  Numbers can be written with, or without decimals:
+
 ```javascript
 let x1 = 34.0; // Written with decimals
 let x2 = 34; // Written without decimals
 ```
+
 - Booleans:<br>
-Booleans can only have two values: ```true``` or ```false```
+  Booleans can only have two values: `true` or `false`
+
 ```javascript
 let x = 5;
 let y = 5;
@@ -41,8 +46,8 @@ let z = 6;
   x == z
 ); // Returns false
 ```
-  - Type conversion: 
-   - Conversion rules:
-    - Values that are intuitively “empty”, like 0, an empty string, null, undefined, and NaN, become ```false.```
-    - Other values become ```true```
 
+- Type conversion:
+  - Conversion rules:
+  - Values that are intuitively “empty”, like 0, an empty string, null, undefined, and NaN, become `false`
+  - Other values become `true`
