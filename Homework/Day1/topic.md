@@ -24,12 +24,14 @@
 let carName1 = "Volvo XC60"; // Using double quotes
 let carName2 = "Volvo XC60"; // Using single quotes
 ```
+
 - Type Conversion:<br>
 - The three approaches for converting to string are:
+
   - value.toString()
   - "" + value
   - String(value)
-  
+
 - **Numbers:**<br>
   JavaScript has only one type of numbers.<br>
   Numbers can be written with, or without decimals:
@@ -109,3 +111,23 @@ let car; // Value is undefined, type is undefined
 ```javascript
 let car = ""; // The value is "", the typeof is "string"
 ```
+
+### 2.2 Object
+
+- Definition:<br>
+  In JavaScript, an object is a standalone entity, with properties and type.<br>
+  Ex:
+
+```javascript
+const car = { type: "Fiat", model: "500", color: "white" };
+```
+
+- Accessing Object Properties:<br>
+- _Two way:_
+ - ```javascript
+  objectName.propertyName;
+   ```
+or
+ - ```javascript
+   objectName["propertyName"]
+   ```
