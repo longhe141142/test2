@@ -17,7 +17,13 @@
 - The basic types of JS :
   - String:
     A string (or a text string) is a series of characters like "John Doe".
-Strings are written with quotes. You can use single or double quotes:
+    Strings are written with quotes. You can use single or double quotes:
+    _Like this:_
+
+```javascript
+let carName1 = "Volvo XC60"; // Using double quotes
+let carName2 = "Volvo XC60"; // Using single quotes
+```
 
 - Numbers
 
