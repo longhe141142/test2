@@ -24,7 +24,12 @@
 let carName1 = "Volvo XC60"; // Using double quotes
 let carName2 = "Volvo XC60"; // Using single quotes
 ```
-
+- Type Conversion:<br>
+- The three approaches for converting to string are:
+  - value.toString()
+  - "" + value
+  - String(value)
+  
 - **Numbers:**<br>
   JavaScript has only one type of numbers.<br>
   Numbers can be written with, or without decimals:
@@ -91,18 +96,16 @@ const person = {
 ```
 
 - **Undefined**<br>
-In JavaScript, a variable without a value, has the value ```undefined```. The type is also ```undefined```.
+  In JavaScript, a variable without a value, has the value `undefined`. The type is also `undefined`.
 
 ```javascript
-let car;    // Value is undefined, type is undefined
+let car; // Value is undefined, type is undefined
 ```
+
 - **Empty Values**<br>
-An empty value has nothing to do with undefined.<br>
-An empty string has both a legal value and a type.
+  An empty value has nothing to do with undefined.<br>
+  An empty string has both a legal value and a type.
+
 ```javascript
-let car = "";    // The value is "", the typeof is "string"
-
+let car = ""; // The value is "", the typeof is "string"
 ```
-
-
- 
