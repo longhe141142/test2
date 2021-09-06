@@ -19,21 +19,18 @@
     A string (or a text string) is a series of characters like "John Doe".
     Strings are written with quotes. You can use single or double quotes:
     _Like this:_
-
 ```javascript
 let carName1 = "Volvo XC60"; // Using double quotes
 let carName2 = "Volvo XC60"; // Using single quotes
 ```
-
-- Numbers
-
+- Numbers:<br>
+JavaScript has only one type of numbers.<br>
+Numbers can be written with, or without decimals:
 ```javascript
 let x1 = 34.0; // Written with decimals
 let x2 = 34; // Written without decimals
 ```
-
 - Booleans
-
 ```javascript
 let x = 5;
 let y = 5;
