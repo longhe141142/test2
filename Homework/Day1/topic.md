@@ -125,12 +125,35 @@ const car = { type: "Fiat", model: "500", color: "white" };
 - Accessing Object Properties:<br>
 - _Two way:_
 
- - ```javascript
-    objectName.propertyName;
-   ```
+```javascript
+objectName.propertyName;
+```
 
 or
 
-  - ```javascript
-     objectName["propertyName"];
-    ``` 
+```javascript
+objectName["propertyName"];
+```
+
+## 2.3 Function
+
+- Definition: <br>
+- A JavaScript function is a block of code designed to perform a particular task.
+- A JavaScript function is executed when "something" invokes it (calls it).
+
+## 2.4 String method
+
+- Extracting String Parts :bread:(3 Methods):
+- slice(start, end) :wrench:
+- substring(start, end) :hammer:
+- substr(start, length) :nut_and_bolt:
+
+- **The slice() Method:**
+- slice() extracts a part of a string and returns the extracted part in a new string.
+- The method takes 2 parameters: the start position, and the end position (end not included).
+  Ex:
+
+```javascript
+let str = "Apple, Banana, Kiwi"; :hammer:
+str.slice(7, 13); // Returns Banana
+```
