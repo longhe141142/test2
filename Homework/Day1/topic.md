@@ -30,7 +30,12 @@ Numbers can be written with, or without decimals:
 let x1 = 34.0; // Written with decimals
 let x2 = 34; // Written without decimals
 ```
-- Booleans
+- Booleans:<br>
+Booleans can only have two values: ```javascript
+ true ```  or
+ ```javascript 
+ false```
+
 ```javascript
 let x = 5;
 let y = 5;
