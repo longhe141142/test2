@@ -15,19 +15,25 @@
 ### 2.1 Data Type
 
 - The basic types of JS :
-  - String
-  - Numbers
-  ```javascript
-  let x1 = 34.0; // Written with decimals
-  let x2 = 34; // Written without decimals
-  ```
-  - Booleans
-  ```javascript
-  let x = 5;
-  let y = 5;
-  let z = 6;
-  (x == y)(
-    // Returns true
-    x == z
-  ); // Returns false
-  ```
+  - String:
+    A string (or a text string) is a series of characters like "John Doe".
+Strings are written with quotes. You can use single or double quotes:
+
+- Numbers
+
+```javascript
+let x1 = 34.0; // Written with decimals
+let x2 = 34; // Written without decimals
+```
+
+- Booleans
+
+```javascript
+let x = 5;
+let y = 5;
+let z = 6;
+(x == y)(
+  // Returns true
+  x == z
+); // Returns false
+```
