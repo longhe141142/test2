@@ -12,6 +12,7 @@ More? Find here: [Instruction](https://heynode.com/tutorial/install-nodejs-local
   - ```command -v nvm```
 
 # USAGE
+## Install LASTED release of NodeJS
 - Use nvm to install the latest LTS release of Node.js:
   ```nvm install --lts```
 - Expected:
@@ -26,6 +27,71 @@ More? Find here: [Instruction](https://heynode.com/tutorial/install-nodejs-local
    Now using node v10.16.3 (npm v6.9.0)
    Creating default alias: default -> lts/* (-> v10.16.3)
   ```  
+- Verify it worked, and that the version is correct:
+  ```
+  node --version
+  # => v10.16.3
+  which node
+  # => /Users/joe/.nvm/versions/node/v10.16.3/bin/node
+  ```
+## List all node version available to install
+- To see the entire list of Node.js versions available to install, enter the following:
+  ```
+  nvm ls-remote
+  ```
+## Install a specific version
+### Install a specific version:
+- Choose one specific node version and type(Example):
+  ```
+  nvm install 8.16.2
+  ```
+### Install the latest release:
+```
+nvm install node
+```
+### Install an older LTS release by codename:
+```
+nvm install carbon
+# => Installs v8.16.2 the latest release of the Carbon LTS line.
+```
+### List installed versions
+- You can see which versions of Node.js you have installed already, and therefore which ones you  can use with the nvm ls command:
+```
+nvm ls
+```
+### Switch to another version
+#### switch to specific version:
+- For a specific version provide a version number:
+```
+nvm use 10.16.3
+# => Now using node v10.16.3 (npm v6.9.0)
+```
+#### Switch to the latest installed version
+```
+nvm use node
+```
+#### Use the latest LTS version:
+```
+nvm use --lts
+```
+
+
+
+
+
+
+
+
+
+  
+  
+
+    
+
+
+
+
+  
 
 
 
