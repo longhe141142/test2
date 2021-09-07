@@ -1,4 +1,19 @@
 # Table of contents
+- [Install nvm](#install-nvm)
+- [USAGE](#usage)
+  * [Install LASTED release of NodeJS](#install-lasted-release-of-nodejs)
+  * [List all node version available to install](#list-all-node-version-available-to-install)
+  * [Install a specific version](#install-a-specific-version)
+    + [Install a specific version:](#install-a-specific-version-)
+    + [Install the latest release:](#install-the-latest-release-)
+    + [Install an older LTS release by codename:](#install-an-older-lts-release-by-codename-)
+    + [List installed versions](#list-installed-versions)
+    + [Switch to another version](#switch-to-another-version)
+      - [switch to specific version:](#switch-to-specific-version-)
+      - [Switch to the latest installed version](#switch-to-the-latest-installed-version)
+      - [Use the latest LTS version:](#use-the-latest-lts-version-)
+
+
 
 # Install nvm
 - FOllowing this step:
