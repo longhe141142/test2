@@ -55,6 +55,7 @@ More? Find here: [Instruction](https://heynode.com/tutorial/install-nodejs-local
   nvm ls-remote
   ```
 ## Install a specific version
+
 ### Install a specific version:
 - Choose one specific node version and type(Example):
   ```
@@ -75,13 +76,16 @@ nvm install carbon
 nvm ls
 ```
 ### Switch to another version
+
 #### switch to specific version:
 - For a specific version provide a version number:
 ```
 nvm use 10.16.3
 # => Now using node v10.16.3 (npm v6.9.0)
 ```
+
 #### Switch to the latest installed version
+
 ```
 nvm use node
 ```
