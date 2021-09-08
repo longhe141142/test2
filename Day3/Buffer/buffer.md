@@ -1,3 +1,23 @@
+# TABLE OF CONTENTS
+- [Why Buffer?](#why-buffer-)
+- [What Are Buffers?](#what-are-buffers-)
+- [Usage:](#usage-)
+  * [Creating Buffers](#creating-buffers)
+  * [Writing to Buffers](#writing-to-buffers)
+  * [Other Prototype](#other-prototype)
+    + [Buffer.compare()](#buffercompare--)
+    + [Buffer.concat](#bufferconcat)
+    + [buf.entries()](#bufentries--)
+    + [Buffer.fill()](#bufferfill--)
+    + [Buffer.from()](#bufferfrom--)
+    + [buff.includes()](#buffincludes--)
+    + [Buffer.isEncoding()](#bufferisencoding--)
+    + [buf.slice()](#bufslice--)
+    + [Buffer swap](#buffer-swap)
+    + [buf.json()](#bufjson--)
+
+
+
 
 # Why Buffer?
 - Node.js servers have to also deal with TCP streams and reading and writing to the filesystem, both of which make it necessary to deal with purely binary streams of data.
@@ -17,7 +37,7 @@
 
 # Usage:
 
-## Creating Buffers:
+## Creating Buffers
 There are a few ways to create new buffers:
 - This buffer is initialized and contains 8 bytes of zero:
 ```javascript
@@ -49,7 +69,7 @@ var buffer = Buffer.from("I'm a string!", "utf-8");
 5
 ```
 
-## Other Prototype:
+## Other Prototype
 
 ### Buffer.compare()
 The Buffer.compare() method enables you to compare two buffer objects to check whether they are equal with the Buffer.compare() method. This method returns -1, 0, or 1, depending on the result of the comparison.
