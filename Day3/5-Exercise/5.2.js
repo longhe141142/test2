@@ -1,75 +1,52 @@
-var replaceWhiteSpace = (Str,resl) =>{
-   return Str.replace(/(\s+)/gi,resl)
-}
+var replaceWhiteSpace = (Str, resl) => {
+  return Str.replace(/(\s+)/gi, resl);
+};
 
-const  getAllUrlParams =(url) => {
-    // get query string from url (optional) or window
-    var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
+const getAllUrlParams = (url) => {
+  var queryString = url ? url.split("?")[1] : window.location.search.slice(1);
 
-    // we'll store the parameters here
-    var obj = {};
+  var obj = {};
 
-    // if query string exists
-    if (queryString) {
+  if (queryString) {
+    queryString = queryString.split("#")[0];
+    var arr = queryString.split("&");
+    for (var i = 0; i < arr.length; i++) {
+      var a = arr[i].split("=");
+      var paramName = a[0];
+      paramName = paramName === "name" ? "fullName" : paramName;
+      var paramValue =
+        typeof a[1] === "undefined" ? true : replaceWhiteSpace(a[1], "%20");
+      paramName = paramName.toLowerCase();
+      if (typeof paramValue === "string") paramValue = paramValue.toLowerCase();
 
-        // stuff after # is not part of query string, so get rid of it
-        queryString = queryString.split('#')[0];
+      if (paramName.match(/\[(\d+)?\]$/)) {
+        var key = paramName.replace(/\[(\d+)?\]/, "");
 
-        // split our query string into its component parts
-        var arr = queryString.split('&');
+        if (!obj[key]) obj[key] = [];
 
-        for (var i = 0; i < arr.length; i++) {
-            // separate the keys and the values
-            var a = arr[i].split('=');
-
-            // set parameter name and value (use 'true' if empty)
-            var paramName = a[0];
-            paramName = paramName === "name" ? "fullName" : paramName
-            var paramValue = typeof (a[1]) === 'undefined' ? true : replaceWhiteSpace(a[1],"%20");
-
-            // (optional) keep case consistent
-            paramName = paramName.toLowerCase();
-            if (typeof paramValue === 'string') paramValue = paramValue.toLowerCase();
-
-            // if the paramName ends with square brackets, e.g. colors[] or colors[2]
-            if (paramName.match(/\[(\d+)?\]$/)) {
-
-                // create key if it doesn't exist
-                var key = paramName.replace(/\[(\d+)?\]/, '');
-                
-                if (!obj[key]) obj[key] = [];
-
-                // if it's an indexed array e.g. colors[2]
-                if (paramName.match(/\[\d+\]$/)) {
-                    // get the index value and add the entry at the appropriate position
-                    var index = /\[(\d+)\]/.exec(paramName)[1];
-                    obj[key][index] = paramValue;
-                } else {
-                    // otherwise add the value to the end of the array
-                    obj[key].push(paramValue);
-                }
-            } else {
-                // we're dealing with a string
-                if (!obj[paramName]) {
-                    // if it doesn't exist, create property
-                    obj[paramName] = paramValue;
-                } else if (obj[paramName] && typeof obj[paramName] === 'string'){
-                    // if property does exist and it's a string, convert it to an array
-                    obj[paramName] = [obj[paramName]];
-                    obj[paramName].push(paramValue);
-                } else {
-                    // otherwise add the property
-                    obj[paramName].push(paramValue);
-                }
-            }
+        if (paramName.match(/\[\d+\]$/)) {
+          var index = /\[(\d+)\]/.exec(paramName)[1];
+          obj[key][index] = paramValue;
+        } else {
+          obj[key].push(paramValue);
         }
+      } else {
+        if (!obj[paramName]) {
+          obj[paramName] = paramValue;
+        } else if (obj[paramName] && typeof obj[paramName] === "string") {
+          obj[paramName] = [obj[paramName]];
+          obj[paramName].push(paramValue);
+        } else {
+          obj[paramName].push(paramValue);
+        }
+      }
     }
+  }
 
-    return obj;
-}
-
+  return obj;
+};
 
 // console.log(getAllUrlParams('https://localhost:8080?name=Nguyen Van A&age=20'))
 // console.log(processName("Nguyen    Thanh  Long"))
 
-module.exports = getAllUrlParams
+module.exports = getAllUrlParams;
