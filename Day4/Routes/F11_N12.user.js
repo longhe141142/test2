@@ -6,6 +6,7 @@ module.exports = app => {
     router.get("/", User.findAll);
     router.get("/:id",User.getUsr)
     router.post("/",User.create)
+    router.patch("/:id/active",User.ActiveUsr)
     app.use('/api/user', router);
 }
 

@@ -17,12 +17,9 @@ const db = {};
 
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
-// sequelize.authentic
-// db.tutorials = require("./tutorial.model.js")(sequelize, Sequelize);
-// db.USER = require('./Object/user')
+
 module.exports = db;
 const { USER:UsrModel } = require("./Object/user")
 db["model"] ={} 
 db.model.USER= UsrModel
-// console.log("UsrModel",UsrModel)
-// console.log(db)
+

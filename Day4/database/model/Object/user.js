@@ -1,8 +1,10 @@
 const db = require("../index")
+const { v4: uuidv4 } = require('uuid');
 
 const USER = db.sequelize.define("USER",{
     Id: {
-        type: db.Sequelize.STRING(36),
+        type: db.Sequelize.UUID,
+        defaultValue: uuidv4(),
         allowNull: false,
         primaryKey: true,
     },
