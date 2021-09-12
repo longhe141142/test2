@@ -7,10 +7,11 @@ const findAllUsr = async () => {
 };
 
 const CreateUsr = async (user_req) => {
-  return await USER.create({
+  let data =  await USER.create({
     UserName: user_req.UseName,
     Password: user_req.Pass,
   });
+  return data instanceof Error ? false : data 
 };
 
 const getUSR = async (id, ACTION) => {

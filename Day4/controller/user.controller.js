@@ -1,81 +1,76 @@
 // const db = require("../models"); // models path depend on your structure
 // const Tutorial = db.tutorials;
-const User = require("./helper/Entity")
-const  { findAllUsr, CreateUsr, getUSR, ModifyUsr } = require("../service/User-service");
+const { ErrorHandler, handleError } = require("../helper/err");
+const handleErr = require("../middlewaare/errHandle")
+const User = require("./helper/Entity");
+const {
+  findAllUsr,
+  CreateUsr,
+  getUSR,
+  ModifyUsr,
+} = require("../service/User-service");
+// const { ne } = require("sequelize/types/lib/operators");
 
-exports.findAll = (req, res) => {
-
+exports.findAll = (req, res,next) => {
   try {
-    
-    getUSR("","GET ALL").then((data) => res.send(data));
+    getUSR("", "GET ALL").then((data) => res.send(data));
   } catch (err) {
-    console.log(err);
-    res.status(500).send({
-      message: err.message || "Some error occurred while retrieving tutorials.",
-    });
+    // console.log(err);
+    // res.status(500).send({
+    //   message: err.message || "Some error occurred while retrieving tutorials.",
+    // });
+    // next(err)
   }
 };
 
-exports.create = (req, res) => {
+exports.create = async (req, res,next) => {
   // Validate request
   if (!req.body.Pass) {
-    res.status(400).send({
-      message: "Content can not be empty!",
-    });
+    handleErr(400,"Pass word may be null")
     return;
   }
 
   try {
     // Create a USER
-    let User_req = new User(
-      req.body.Id,
-      req.body.UseName,
-      req.body.Pass
-    );
-    CreateUsr(User_req).then((data) => res.send(data));
+    let User_req = new User(req.body.Id, req.body.UseName, req.body.Pass);
+    let data = await CreateUsr(User_req);
+    if(!data){
+      handleErr(new ErrorHandler(400,"Can't create user!"),req,res,next)
+      return
+    }else{
+      res.send(data)
+    }
   } catch (err) {
-    res.status(500).send({
-      message:
-        err.message || "Some error occurred while creating the Tutorial.",
-    });
+    next(handleErr(new ErrorHandler(400,err),req,res,next));
   }
 };
 
-exports.getUsr = (req, res) => {
-  const id = req.query.id;
-  // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
-  console.log(id)
+exports.getUsr =async (req, res, next) => {
   try {
-    getUSR(id,"GET BY ID").then((data) => res.send(data));
+    const id = req.query.id;
+    console.log(id);
+    if (!id) {
+      handleErr(new ErrorHandler(404,"Not have param Id!"),req, res,next)
+    }
+    let data = await getUSR(id, "GET BY ID");
+    if(!(!!data.length)){
+      handleErr(new ErrorHandler(404,"User not found!"),req, res,next)
+    }
+    res.send(data)
   } catch (err) {
-    console.log(err);
-    res.status(500).send({
-      message: err.message || "Some error occurred while retrieving tutorials.",
-    });
+     handleErr(new ErrorHandler(404,err),req,res,next)
   }
 };
 
-exports.ActiveUsr = (req,res) => {
-  const id = req.body.Id
-  if (!req.body.Id) {
-    res.status(400).send({
-      message: "Content can not be empty!",
-    });
-    return;
-  }
-
+exports.ActiveUsr = (req, res,next) => {
   try {
-    // Create a USER
-    let User_req = new User(
-      req.body.Id,
-      req.body.UseName,
-      req.body.Pass
-    );
-    ModifyUsr(id,"ACTIVE").then((data) => res.send(data));
+    let { Id } = req.body;
+    if(!Id){
+      handleErr(new ErrorHandler(404,"Id may be null!"),req,res,next)
+      return
+    }
+    ModifyUsr(Id, "ACTIVE").then((data) => res.send(data));
   } catch (err) {
-    res.status(500).send({
-      message:
-        err.message || "Some error occurred while creating the Tutorial.",
-    });
+      next(handleErr(new ErrorHandler(500,err),req,res,next));
   }
-}
+};
