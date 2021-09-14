@@ -3,11 +3,12 @@ const { database } = require('../model')
 const  { USER } = require('../model/Object/USER')
 const _UsrServices_ = {
      
-    findUser: async (useName) =>{
+    findUser: async (useName,pass) =>{
        return __self.findIdByUseName(useName) instanceof Error
        ? false : await USER.findOne({
            where: {
-               Id : await __self.findIdByUseName(useName).then(data=>data)
+               Id : await __self.findIdByUseName(useName).then(data=>data),
+               PassWord : pass 
            }
        })
     },
