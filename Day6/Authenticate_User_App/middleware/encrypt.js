@@ -9,7 +9,7 @@ const generateAccessToken = (user) => {
         exp: Math.floor(Date.now() / 1000) + (6000 * 60),
         data: user,
         // algorithm: 'RS256'
-      }, "process.env.TOKEN")
+      }, process.env.TOKEN)
 }
 
 module.exports = (req,res,User,process) => {

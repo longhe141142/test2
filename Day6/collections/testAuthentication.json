@@ -1,0 +1,72 @@
+{
+	"info": {
+		"_postman_id": "10afe71b-27c7-45bc-a2eb-12de2c47ccfd",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "authentication with token",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzE5OTk0NTYsImRhdGEiOnsiSWQiOiIxMiIsIlVzZXJOYW1lIjoibG9uZyIsIlBhc3N3b3JkIjoiMTIzNCIsIkFnZSI6bnVsbCwiRW1haWwiOm51bGwsIlBob25lIjpudWxsfSwiaWF0IjoxNjMxNjM5NDU2fQ.RMwwkrl1vRejagoa8zJhlfVxbLQoqGhSWAZQwt-wO68\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8020/api/user/id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8020",
+					"path": [
+						"api",
+						"user",
+						"id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add token for user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"UseName\": \"long\",\n    \"Pass\": \"1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8020/api/user/id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8020",
+					"path": [
+						"api",
+						"user",
+						"id"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
