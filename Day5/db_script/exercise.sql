@@ -29,7 +29,7 @@ CUSTOMER as cus
  USER.UserName,
  USER.Password 
  from CUSTOMER 
- INNER JOIN USER 
+ LEFT JOIN  USER 
  on CUSTOMER.UserId = USER.Id
 
 /*Viết câu lệnh sql trả về tất cả các sản phẩm và ảnh của mỗi sản phẩm. có limit 0 – 20, có where like name
