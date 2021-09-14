@@ -23,7 +23,7 @@ const _UsrControl_ = {
                 _UseName : UseName,
                 _Status : "Success"
             }
-            require("../Authenticate_User_App/middleware/encrypt")(req,res,User)
+            require("../Authenticate_User_App/middleware/encrypt")(req,res,User,process)
         }
     }
 }
