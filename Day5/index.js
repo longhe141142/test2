@@ -18,14 +18,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to ... application." });
-});
 
-const PORT = process.env.PORT || 8082;
+  res.json({ message: "Welcome to ... application." });
+})
+
+app.post("/", (req, res) => {
+
+  res.json({ message: "Welcome to ... application." });
+})
+
+
+const PORT = 8082;
 
 require("./Routes/F11_N12.user")(app)
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${process.env.PORT}.`);
+app.listen(8802, () => {
+  console.log(`Server is running on port ${PORT}.`);
 });
 
 module.exports = app

@@ -7,6 +7,7 @@ const USER = db.sequelize.define("USER",{
         defaultValue: uuidv4(),
         allowNull: false,
         primaryKey: true,
+        unique:true
     },
     UserName: {
         type: db.Sequelize.STRING(30),
