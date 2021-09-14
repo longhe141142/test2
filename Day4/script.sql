@@ -1,0 +1,3 @@
+select * from USER INNER JOIN CUSTOMER 
+on USER.Id = CUSTOMER.UserId
+

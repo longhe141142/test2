@@ -6,5 +6,4 @@ const testAuthen = () => {
     .catch(err => console.log(err))
 }
 
-testAuthen()
 module.exports = testAuthen

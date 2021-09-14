@@ -1,5 +1,10 @@
+// const { USE } = require("sequelize/types/lib/index-hints");
 const { USER } = require("../database/model/Object/user");
-
+var chai = require('chai')
+  , expect = chai.expect
+  , should = chai.should(),
+     assert = chai.assert;
+const mocha = require('mocha')
 console.log("db model:", USER);
 
 const findAllUsr = async () => {
@@ -73,15 +78,13 @@ const ModifyUsr = async (id, ACTION) => {
       return user
 };
 
-const func = async (use) =>{
-  console.log(await USER.findOne({
-    where: {
-      UserName : use
-    }
-  }))
+const getIdByUseName = async (_UseName) => {
+      return await USER.findOne({
+        where: {
+          UserName : _UseName
+        }
+      })
 }
 
-func("long")
 
-
-module.exports = { findAllUsr, CreateUsr, getUSR, ModifyUsr };
+module.exports = { findAllUsr, CreateUsr, getUSR, ModifyUsr,getIdByUseName };

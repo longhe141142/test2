@@ -1,10 +1,9 @@
 require('dotenv').config()
 
-console.log(process.env.PASSWORD,process.env.HOST)
 
 module.exports = {
 
-    HOST: "localhost",
+    HOST: process.env.HOST,
     
     USER: "root",
     
@@ -25,5 +24,4 @@ module.exports = {
     idle: 10000
     
     }
-    
     };
