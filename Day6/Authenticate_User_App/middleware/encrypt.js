@@ -6,10 +6,10 @@ const generateAccessToken = (user) => {
     console.log("user",user)
     // return jwt.sign(JSON.stringify(user), process.env.TOKEN, { algorithm: 'RS256'});
  return   jwt.sign({
-        exp: Math.floor(Date.now() / 1000) + (60 * 60),
+        exp: Math.floor(Date.now() / 1000) + (6000 * 60),
         data: user,
-        algorithm: 'RS256'
-      }, process.env.TOKEN)
+        // algorithm: 'RS256'
+      }, "process.env.TOKEN")
 }
 
 module.exports = (req,res,User,process) => {

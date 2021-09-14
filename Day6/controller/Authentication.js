@@ -1,4 +1,5 @@
 const { ErrorHandler } = require("../Authenticate_User_App/Handling/Error/ErrorHandle")
+const verifyToken = require("../Authenticate_User_App/middleware/auth")
 const handleErr = require("../Authenticate_User_App/middleware/err.middleware")
 const _Response_ = require("../Authenticate_User_App/middleware/response")
 const _UsrServices_ = require("../Authenticate_User_App/service/UserService")
@@ -25,6 +26,10 @@ const _UsrControl_ = {
             }
             require("../Authenticate_User_App/middleware/encrypt")(req,res,User,process)
         }
+    }
+    ,
+    decoding: async(req,res,next) =>{
+        verifyToken(req, res, next)
     }
 }
 
