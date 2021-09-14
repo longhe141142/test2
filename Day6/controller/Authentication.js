@@ -18,7 +18,12 @@ const _UsrControl_ = {
             handleErr(new ErrorHandler(404,"User Not Found"),req,res,next)
         }else{
             // _Response_.SendStatus("err",res)
-            _Response_.SendUser("err",res,process)
+            // _Response_.SendUser("err",res,process)
+            let User = {
+                _UseName : UseName,
+                _Status : "Success"
+            }
+            require("../Authenticate_User_App/middleware/encrypt")(req,res,User)
         }
     }
 }
