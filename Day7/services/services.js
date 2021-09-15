@@ -57,16 +57,16 @@ module.exports = services
 
 services._Usr_Service_.getAllUser();
 
-// services._Usr_Service_.addUser({
-//     Id:"13swdssdss4",
-//     UseName:"he141142",
-//     Pass:"1234"
-// }).then(data => {console.log(data)})
+services._Usr_Service_.addUser({
+    Id:"13swdssddss4",
+    UseName:"he141142",
+    Pass:"1234"
+}).then(data => {console.log(data)})
 
-// const test = async()=>{
-//   let message = await services._Usr_Service_.deleteUser("13swdssdss4");
-//   let message = await services._Usr_Service_.updateUserPass({_id:"13wdssdss4"},{Pass:"1998"})
-//   console.log("message:",message)
-
-// }
-// test()
+const test = async()=>{
+  let message = await services._Usr_Service_.deleteUser("13swdssdss4");
+  console.log("message:",message)
+  message = await services._Usr_Service_.updateUserPass({_id:"13wdssdss4"},{Pass:"1998"})
+  console.log("message:",message)
+}
+test()
