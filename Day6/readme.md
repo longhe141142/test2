@@ -1,4 +1,20 @@
 
+# TABLE OF CONTENT
+- [NO SQL](#no-sql)
+  * [DEFINITION](#definition)
+  * [HOW DOES IT WORK?](#how-does-it-work-)
+  * [WHY NoSQL?](#why-nosql-)
+- [SQL](#sql)
+  * [DEFINITION](#definition-1)
+  * [USAGE](#usage)
+- [SQL & NoSQL](#sql---nosql)
+- [Mongoose DB with Nodejs](#mongoose-db-with-nodejs)
+  * [Create schema:](#create-schema-)
+  * [Creating a model:](#creating-a-model-)
+  * [Small tips for custom id](#small-tips-for-custom-id)
+  * [Static function Schema](#static-function-schema)
+  * [Query Helpers](#query-helpers)
+  * [Virtuals](#virtuals)
 
 # NO SQL
 ## DEFINITION
