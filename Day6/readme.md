@@ -37,3 +37,128 @@
 | Joins| Typically required | Typically not required|
 | Data to Object Mapping| Requires ORM (object-relational<br>  mapping) |Many do not require ORMs.<br> MongoDB documents map directly<br> to data structures in<br> most popular programming languages.
 |
+
+# Mongoose DB with Nodejs
+## Create schema:
+- Everything in Mongoose starts with a Schema. Each schema maps to a MongoDB collection and defines the shape of the documents within that collection:
+```javascript
+import mongoose from 'mongoose';
+  const { Schema } = mongoose;
+
+  const blogSchema = new Schema({
+    title:  String, // String is shorthand for {type: String}
+    author: String,
+    body:   String,
+    comments: [{ body: String, date: Date }],
+    date: { type: Date, default: Date.now },
+    hidden: Boolean,
+    meta: {
+      votes: Number,
+      favs:  Number
+    }
+  });
+```
+- _If you want to add additional keys later, use the Schema#add method._
+- SchemaTypes are:
+  * String
+  * Number
+  * Date
+  * Buffer  
+  * Boolean
+  * Mixed
+  * ObjectId
+  * Array
+  * Decimal128
+  * Map
+## Creating a model:
+- To use our schema definition, we need to convert our ```Schema``` into a Model we can work with. To do so, we pass it into ```mongoose.model(modelName, schema)```:
+
+```javascript
+  const Blog = mongoose.model('Blog', blogSchema);
+```
+- **Ids**
+By default, Mongoose adds an ```_id``` property to your schemas.
+```javascript
+const schema = new Schema();
+
+schema.path('_id'); // ObjectId { ... }
+```
+- When you create a new document with the automatically added ```_id``` property, Mongoose creates a new ```_id``` of type ObjectId to your document.
+```javascript
+const Model = mongoose.model('Test', schema);
+
+const doc = new Model();
+doc._id instanceof mongoose.Types.ObjectId; // true
+```
+
+## Small tips for custom id
+- Custom your own id:
+```javascript
+  var schema = mongoose.Schema(
+    {
+      _id: String,
+      Pass: String,
+      UseName: String,
+    },
+    { timestamps: true }
+  );
+
+  schema.method("toJSON", function () {
+    const { __v, _id, ...object } = this.toObject();
+    object.id = _id;
+    return object;
+  });
+
+  const USER = mongoose.model("USER", schema);
+```
+
+## Static function Schema
+- You can also add static functions to your model. There are two equivalent ways to add a static:
+  * Add a function property to ```schema.statics```
+  * Call the ```Schema#static()``` function
+```javascript
+ // Assign a function to the "statics" object of our animalSchema
+  animalSchema.statics.findByName = function(name) {
+    return this.find({ name: new RegExp(name, 'i') });
+  };
+  // Or, equivalently, you can call `animalSchema.static()`.
+  animalSchema.static('findByBreed', function(breed) { return this.find({ breed }); });
+
+  const Animal = mongoose.model('Animal', animalSchema);
+  let animals = await Animal.findByName('fido');
+  animals = animals.concat(await Animal.findByBreed('Poodle'));
+```
+- __Do not declare statics using ES6 arrow functions (```=>```). Arrow functions explicitly prevent binding this, so the above examples will not work because of the value of this.__
+
+## Query Helpers
+
+You can also add query helper functions, which are like instance methods but for mongoose queries. Query helper methods let you extend mongoose's [chainable](https://mongoosejs.com/docs/queries.html) query builder API.
+
+```javascript
+ animalSchema.query.byName = function(name) {
+    return this.where({ name: new RegExp(name, 'i') })
+  };
+
+  const Animal = mongoose.model('Animal', animalSchema);
+
+  Animal.find().byName('fido').exec((err, animals) => {
+    console.log(animals);
+  });
+
+  Animal.findOne().byName('fido').exec((err, animal) => {
+    console.log(animal);
+  });
+```
+
+- Example work with model like my nodeJS project:
+```javascript
+
+```
+
+
+
+
+
+
+
+
