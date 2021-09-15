@@ -149,8 +149,32 @@ You can also add query helper functions, which are like instance methods but for
     console.log(animal);
   });
 ```
+## Virtuals
+[Virtuals](https://mongoosejs.com/docs/api.html#schema_Schema-virtual) are document properties that you can get and set but that do not get persisted to MongoDB. The getters are useful for formatting or combining fields, while setters are useful for de-composing a single value into multiple values for storage.
 
-- Example work with model like my nodeJS project:
+```javascript
+ // define a schema
+  const personSchema = new Schema({
+    name: {
+      first: String,
+      last: String
+    }
+  });
+
+  // compile our model
+  const Person = mongoose.model('Person', personSchema);
+
+  // create a document
+  const axl = new Person({
+    name: { first: 'Axl', last: 'Rose' }
+```
+- Suppose you want to print out the person's full name. You could do it yourself:
+
+```javascript
+console.log(axl.name.first + ' ' + axl.name.last); // Axl Rose
+```
+
+- Example work with **Viturals** in my nodeJS project:
 ```javascript
 const db = require("../model/index");
 const USERR = db.USER;
