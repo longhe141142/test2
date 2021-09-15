@@ -26,6 +26,8 @@ const PORT = process.env.PORT || 8082;
 
 ApplyRouter(app)
 
+require("../Authenticate_User_App/router/order.router")(app)
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}.`);
 });
