@@ -31,6 +31,31 @@ const service = {
           return false;
         });
     },
+    getUserById: async (id) => {
+      return await db.user.findById(id);
+    },
+    UpdateUser: async (id, data) => {
+      //way1:
+      // console.log("turn in:",id)
+      // let user = await db.user.findOne({_id:id})
+      // if(user instanceof Error || !user){
+      //   console.log("Errorx86:",user)
+      //   return false;
+      // }else{
+      //   user.overwrite(data)
+      //   return await user.save()
+      // }
+      // way2:
+      // return await db.user.replaceOne({ id }, data);
+      //way3
+      return await db.user.updateOne(
+        {
+          _id: id,
+        },
+        data,
+        { upsert: true }
+      );
+    },
   },
 };
 

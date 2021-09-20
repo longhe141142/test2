@@ -1,12 +1,12 @@
 const _Response_ = {
-    SendStatus:  (err,res) => {
+    SendStatus:  (res) => {
         res.status(200).send(JSON.stringify({
             status: "SUCCESS",
             statusCode: 200,
             message: "EVERY THING OK"
         }))
     },
-    SendUser: (err,res,user) => {
+    SendUser: (res,user) => {
         res.send(
             JSON.stringify(user)
         )

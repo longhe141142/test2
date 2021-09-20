@@ -1,6 +1,8 @@
 const { ErrorHandler } = require("../middleware/Error/ErrHandle");
 const handleErr = require("../middleware/err");
 const service = require("../services/index");
+const _Response_ = require("../middleware/response");
+
 exports.create = async (req, res, next) => {
   // Validate request
   if (!req.body.UseName) {
@@ -16,20 +18,18 @@ exports.create = async (req, res, next) => {
   try {
     // Create a USER
     let data = await service.user_service.createUser(req.body);
-    console.log(data)
+    console.log(data);
     if (!data) {
       handleErr(new ErrorHandler(400, "Can't create user!"), req, res, next);
       return;
-    } 
-    else if(data instanceof Error){
+    } else if (data instanceof Error) {
       handleErr(new ErrorHandler(400, "Can't create user!"), req, res, next);
-      return;    }
-    else{
+      return;
+    } else {
       res.send(data);
-     
     }
   } catch (err) {
-    console.log(err)
+    console.log(err);
     next(handleErr(new ErrorHandler(400, "error"), req, res, next));
   }
 };
@@ -42,3 +42,31 @@ exports.getAllUsers = async (req, res, next) => {
     handleErr(new ErrorHandler(404, err), req, res, next);
   }
 };
+
+exports.getUserById = async (req, res, next) => {
+  if (!req.params.id) {
+    handleErr(new ErrorHandler(400, "Must have param"), req, res, next);
+    return
+  }
+  let user = await service.user_service.getUserById(req.params.id);
+  user instanceof Error
+    ? handleErr(new ErrorHandler(400, "Must have param"), req, res, next)
+    : _Response_.SendUser(res, user);
+};
+
+
+exports.UpdateUser = async (req,res,next) => {
+  // console.log(req.body.id)
+  if(!req.body.id){
+    handleErr(new ErrorHandler(400, "Must have id"), req, res, next);
+    return
+  }
+  let log = await service.user_service.UpdateUser(req.body.id,req.body)
+  if(!log || log instanceof Error){
+    console.log("err",log)
+    handleErr(new ErrorHandler(400, "CAnt update User"), req, res, next);
+    return
+  }
+  console.log("log",log)
+  _Response_.SendStatus(res)
+}
