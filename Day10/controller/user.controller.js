@@ -27,8 +27,8 @@ exports.create = async (req, res, next) => {
       handleErr(new ErrorHandler(400, "Can't create user!"), req, res, next);
       return;
     } else {
-      res.locals.s = "new"
-      next()
+      res.locals.s = "new";
+      next();
     }
   } catch (err) {
     console.log(err);
@@ -54,6 +54,10 @@ exports.getUserById = async (req, res, next) => {
   user instanceof Error
     ? handleErr(new ErrorHandler(400, "Must have param"), req, res, next)
     : _Response_.SendUser(res, user);
+  
+    if(user == null){
+      next()
+    }
 };
 
 exports.UpdateUser = async (req, res, next) => {
@@ -105,7 +109,6 @@ exports.InActiveUser = async (req, res, next) => {
 };
 
 exports.sendMail = async (req, res, next) => {
-  var postParams = req.payload
   var transporter = nodemailer.createTransport({
     // config mail server
     host: "smtp.gmail.com",
@@ -113,34 +116,43 @@ exports.sendMail = async (req, res, next) => {
     secure: true,
     auth: {
       user: "longnt1@vmodev.com", //Tài khoản gmail vừa tạo
-      pass: "neirmcduqnlpcmzc" //Mật khẩu tài khoản gmail vừa tạo
+      pass: "neirmcduqnlpcmzc", //Mật khẩu tài khoản gmail vừa tạo
     },
     tls: {
       // do not fail on invalid certs
       rejectUnauthorized: false,
     },
-
   });
 
-  var mainOptions = { // thiết lập đối tượng, nội dung gửi mail
-    from: 'NQH-Test nodemailer',
+  var mainOptions = {
+    // thiết lập đối tượng, nội dung gửi mail
+    from: "NQH-Test nodemailer",
     to: req.body.mail,
-    subject: 'Test Nodemailer',
-    text: 'Your text is here',//Thường thi mình không dùng cái này thay vào đó mình sử dụng html để dễ edit hơn
-    html: "<h1>Hello Billy</h1>" //Nội dung html mình đã tạo trên kia :))
-}
-transporter.sendMail(mainOptions, function(err, info){
+    subject: "Test Nodemailer",
+    text: "Your text is here", //Thường thi mình không dùng cái này thay vào đó mình sử dụng html để dễ edit hơn
+    html: "<h1>Hello Billy</h1>", //Nội dung html mình đã tạo trên kia :))
+  };
+  transporter.sendMail(mainOptions, function (err, info) {
     if (err) {
-        console.log(err);
-        // req.flash('mess', 'Lỗi gửi mail: '+err); //Gửi thông báo đến người dùng
-        res.end("error encountered")
+      console.log(err);
+      // req.flash('mess', 'Lỗi gửi mail: '+err); //Gửi thông báo đến người dùng
+      res.end("error encountered");
     } else {
-        console.log('Message sent: ' +  info.response);
-        res.end("Email sent!")
+      console.log("Message sent: " + info.response);
+      res.end("Email sent!");
     }
-});
+  });
 };
 
-exports.login = (req,res,next) =>{
-   service.user_service.login(req,res,next)
-}
+exports.login = (req, res, next) => {
+  service.user_service.login(req, res, next);
+};
+
+exports.paging = async (req, res, next) => {
+   console.log(req.params.page)
+   let page = req.params.page
+   let limit = 4
+   let skip = (page-1) * limit
+   let data = await service.user_service.getUserByPaging(skip,limit)
+   _Response_.SendStatus_WithMessage(res,200,data)
+};

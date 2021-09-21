@@ -89,13 +89,20 @@ const service = {
       try {
         const result = await authSchema.validateAsync(req.body);
         console.log("rel", result);
-        const user = await db.user.findOne({ Email: "longnt1@999.com" })
+        const user = await db.user.findOne({ Email: "longnt1@999.com" });
 
-        console.log("user:",user)
+        console.log("user:", user);
 
         const isMatch = await user.isValidPassword(result.password);
         if (!isMatch)
-          handleErr(new ErrorHandler(400, "Must Wrong password"), req, res, next);
+          handleErr(
+            new ErrorHandler(400, "Must Wrong password"),
+            req,
+            res,
+            next
+          );
+        console.log("Map:", isMatch);
+        res.send("Login success!");
       } catch (error) {
         if (error.isJoi === true) {
           console.log(error);
@@ -104,6 +111,46 @@ const service = {
         // return next(createError.BadRequest('Invalid Username/Password'))
         // next(error)
       }
+    },
+    getUserByPaging: async (_skip,_limit) =>{
+       return await db.user.aggregate(
+          [
+            {
+              '$skip': _skip
+            }, {
+              '$limit': _limit
+            }
+          ]
+        )
+    }
+  },
+  Order_Service: {
+    add: async (obj) => {
+      let { _id, Name, Description, Price, Tax, Phone, Discount } =
+        obj;
+      let user = new db.user({
+        _id,
+        Name,
+        Description,
+        Price,
+        Tax,
+        Phone,
+        Discount,
+        totalPrice,
+        IsDeleted,
+        CustomerId ,
+      });
+      validateId(db.user);
+      return await user
+        .save()
+        .then((data) => {
+          console.log("datax64:", data);
+          return true;
+        })
+        .catch((err) => {
+          console.log("errx64:", err);
+          return false;
+        });
     },
   },
 
