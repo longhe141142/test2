@@ -30,7 +30,7 @@ exports.create = async (req, res, next) => {
       res.locals.s = "new";
       next();
     }
-  } catch (err) {
+  }catch (err) {
     console.log(err);
     next(handleErr(new ErrorHandler(400, "error"), req, res, next));
   }

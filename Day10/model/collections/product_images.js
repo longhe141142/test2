@@ -3,12 +3,11 @@ module.exports = (mongoose) => {
       {
         _id: String,
         Name: String,
-        Product: String,
+        ProductId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "product",
+        },
         Url: String,
-        Product: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "product",
-          },
       },
       { timestamps: { createdAt: "created_at", UpdateAt: "update_at" } }
     );

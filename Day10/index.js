@@ -6,6 +6,7 @@ const cors = require("cors");
 require("./model/db.connection").connect()
 const app = express();
 const ApplyRouter = require("./Routes/user.route")
+const ApplyOrderRouter = require("./Routes/order.route")
 
 var corsOptions = {
   origin: "http://localhost:8081"
@@ -26,6 +27,7 @@ app.get("/", (req, res) => {
 const PORT = process.env.PORT || 8082;
 
 ApplyRouter(app)
+ApplyOrderRouter(app)
 
 // require("../Authenticate_User_App/router/order.router")(app)
 

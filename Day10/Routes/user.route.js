@@ -15,7 +15,6 @@ const ApplyRouter = (app) => {
   router.post("/id", createUser, sendMail);
   router.get("/id", getAllUsr);
   router.get("/:id", getUserById);
-
   router.patch("/update", updateUser);
   router.patch("/active/:id", active);
   router.patch("/inactive/:id", inactive);

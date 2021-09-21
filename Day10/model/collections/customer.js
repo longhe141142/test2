@@ -1,14 +1,12 @@
 module.exports = (mongoose) => {
     var schema = mongoose.Schema(
       {
-        _id: String,
-        UserId: String,
+        UserId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "user"
+        },
         PaymentMethod: Boolean,
         IsActive: Number,
-        User: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "user"
-        },
       },
       { timestamps: { createdAt: "created_at", UpdateAt: "update_at" } }
     );
@@ -18,7 +16,6 @@ module.exports = (mongoose) => {
       return object;
     });
     const customer = mongoose.model("customer", schema,"customer");
-  
     return customer;
   };
   

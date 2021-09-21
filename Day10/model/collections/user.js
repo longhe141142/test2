@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 module.exports = (mongoose) => {
   var schema = mongoose.Schema(
     {
-      _id: String,
       UseName: {
         type: String,
         immutable: true,
