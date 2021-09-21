@@ -1,6 +1,10 @@
 const db = require("../model/index");
 let validate = require("../model/helper/schema.validate");
 const { validateId } = require("../model/helper/schema.validate");
+const { authSchema } = require("../helper/authen");
+const handleErr = require("../middleware/err");
+const { ErrorHandler } = require("../middleware/Error/ErrHandle");
+
 const service = {
   user_service: {
     getAllUser: async () => {
@@ -56,7 +60,87 @@ const service = {
         { upsert: true }
       );
     },
+    Active: async (id) => {
+      let user = await db.user.findOne({ _id: id });
+
+      if (user != null) {
+        user.IsActive = 1;
+      }
+      return user instanceof Error || user == null
+        ? false
+        : user
+            .save()
+            .then((data) => data)
+            .catch((err) => err);
+    },
+    InActive: async (id) => {
+      let user = await db.user.findOne({ _id: id });
+      if (user != null) {
+        user.IsActive = 0;
+      }
+      return user instanceof Error || !user
+        ? false
+        : user
+            .save()
+            .then((data) => data)
+            .catch((err) => err);
+    },
+    login: async (req, res, next) => {
+      try {
+        const result = await authSchema.validateAsync(req.body);
+        console.log("rel", result);
+        const user = await db.user.findOne({ Email: "longnt1@999.com" })
+
+        console.log("user:",user)
+
+        const isMatch = await user.isValidPassword(result.password);
+        if (!isMatch)
+          handleErr(new ErrorHandler(400, "Must Wrong password"), req, res, next);
+      } catch (error) {
+        if (error.isJoi === true) {
+          console.log(error);
+        }
+        console.log(error);
+        // return next(createError.BadRequest('Invalid Username/Password'))
+        // next(error)
+      }
+    },
   },
+
+  // Customer_Service: {
+  //   addCustomer: async (obj) => {
+  //     let { _id, UserId, PaymentMethod } = obj;
+  //     let customer = new db.customer({
+  //       _id,
+  //       UserId,
+  //       PaymentMethod,
+  //       User: UserId
+  //     });
+  //     validateId(db.customer);
+  //     return customer.save(err => {
+  //       if(err){
+  //         console.log("err save customer:",err)
+  //       }
+  //       let user = await db.user.findById(UserId);
+  //       if(user == null){
+  //          let user = new db.user({
+  //           _id: UserId,
+  //           UseName: "guess",
+  //           Password:"123",
+  //           Age: 0,
+  //           Email:"",
+  //           Phone:"",
+  //           Address:"",
+  //           IsActive:0,
+  //          })
+  //          user.save().then(data => {console.log(data)})
+  //          .catch(err=>{console.log("err save user",err)})
+  //          customer.IsActive = 0
+  //          customer.save().then(data=>{console.log(data)}).catch(err=>{console.log(err)})
+  //       }
+  //     }).then(data=>data).catch(err => err)
+  //   },
+  // },
 };
 
 module.exports = service;

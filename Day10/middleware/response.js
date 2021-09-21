@@ -10,6 +10,13 @@ const _Response_ = {
         res.send(
             JSON.stringify(user)
         )
+    },
+    SendStatus_WithMessage: (res,statusCode,message)=>{
+        res.status(statusCode).send(JSON.stringify({
+            status: (parseInt(statusCode)>=400)? "FAILED" : "SUCCESS",
+            statusCode: statusCode,
+            message: message
+        }))
     }
 }
 

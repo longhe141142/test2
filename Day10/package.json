@@ -9,7 +9,9 @@
   "author": "he141142",
   "license": "ISC",
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "assert": "^2.0.0",
+    "bcrypt": "^5.0.1",
     "bluebird": "^3.7.2",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
@@ -17,6 +19,7 @@
     "i": "^0.3.6",
     "mongodb": "^4.1.2",
     "mongoose": "^6.0.6",
+    "nodemailer": "^6.6.3",
     "uuid": "^8.3.2"
   }
 }
