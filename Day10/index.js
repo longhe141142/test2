@@ -6,7 +6,8 @@ const cors = require("cors");
 require("./model/db.connection").connect()
 const app = express();
 const ApplyRouter = require("./Routes/user.route")
-const ApplyOrderRouter = require("./Routes/order.route")
+const ApplyOrderRouter = require("./Routes/order.route");
+const ApplyProductRouter = require('./Routes/product.router');
 
 var corsOptions = {
   origin: "http://localhost:8081"
@@ -28,6 +29,7 @@ const PORT = process.env.PORT || 8082;
 
 ApplyRouter(app)
 ApplyOrderRouter(app)
+ApplyProductRouter(app)
 
 // require("../Authenticate_User_App/router/order.router")(app)
 

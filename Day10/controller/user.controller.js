@@ -3,6 +3,8 @@ const handleErr = require("../middleware/err");
 const service = require("../services/index");
 const _Response_ = require("../middleware/response");
 const nodemailer = require("nodemailer");
+const sendMail = require("../middleware/sendEmail");
+
 
 exports.create = async (req, res, next) => {
   // Validate request
@@ -27,8 +29,7 @@ exports.create = async (req, res, next) => {
       handleErr(new ErrorHandler(400, "Can't create user!"), req, res, next);
       return;
     } else {
-      res.locals.s = "new";
-      next();
+      sendMail(req, res, next,req.body.Email);
     }
   }catch (err) {
     console.log(err);
@@ -108,41 +109,41 @@ exports.InActiveUser = async (req, res, next) => {
   _Response_.SendStatus_WithMessage(res, 200, "InActive success!");
 };
 
-exports.sendMail = async (req, res, next) => {
-  var transporter = nodemailer.createTransport({
-    // config mail server
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
-    auth: {
-      user: "longnt1@vmodev.com", //Tài khoản gmail vừa tạo
-      pass: "neirmcduqnlpcmzc", //Mật khẩu tài khoản gmail vừa tạo
-    },
-    tls: {
-      // do not fail on invalid certs
-      rejectUnauthorized: false,
-    },
-  });
+// exports.sendMail = async (req, res, next) => {
+//   var transporter = nodemailer.createTransport({
+//     // config mail server
+//     host: "smtp.gmail.com",
+//     port: 465,
+//     secure: true,
+//     auth: {
+//       user: "longnt1@vmodev.com", //Tài khoản gmail vừa tạo
+//       pass: "neirmcduqnlpcmzc", //Mật khẩu tài khoản gmail vừa tạo
+//     },
+//     tls: {
+//       // do not fail on invalid certs
+//       rejectUnauthorized: false,
+//     },
+//   });
 
-  var mainOptions = {
-    // thiết lập đối tượng, nội dung gửi mail
-    from: "NQH-Test nodemailer",
-    to: req.body.mail,
-    subject: "Test Nodemailer",
-    text: "Your text is here", //Thường thi mình không dùng cái này thay vào đó mình sử dụng html để dễ edit hơn
-    html: "<h1>Hello Billy</h1>", //Nội dung html mình đã tạo trên kia :))
-  };
-  transporter.sendMail(mainOptions, function (err, info) {
-    if (err) {
-      console.log(err);
-      // req.flash('mess', 'Lỗi gửi mail: '+err); //Gửi thông báo đến người dùng
-      res.end("error encountered");
-    } else {
-      console.log("Message sent: " + info.response);
-      res.end("Email sent!");
-    }
-  });
-};
+//   var mainOptions = {
+//     // thiết lập đối tượng, nội dung gửi mail
+//     from: "NQH-Test nodemailer",
+//     to: req.body.mail,
+//     subject: "Test Nodemailer",
+//     text: "Your text is here", //Thường thi mình không dùng cái này thay vào đó mình sử dụng html để dễ edit hơn
+//     html: "<h1>Hello Billy</h1>", //Nội dung html mình đã tạo trên kia :))
+//   };
+//   transporter.sendMail(mainOptions, function (err, info) {
+//     if (err) {
+//       console.log(err);
+//       // req.flash('mess', 'Lỗi gửi mail: '+err); //Gửi thông báo đến người dùng
+//       res.end("error encountered");
+//     } else {
+//       console.log("Message sent: " + info.response);
+//       res.end("Email sent!");
+//     }
+//   });
+// };
 
 exports.login = (req, res, next) => {
   service.user_service.login(req, res, next);
@@ -154,5 +155,5 @@ exports.paging = async (req, res, next) => {
    let limit = 4
    let skip = (page-1) * limit
    let data = await service.user_service.getUserByPaging(skip,limit)
-   _Response_.SendStatus_WithMessage(res,200,data)
+   _Response_.SendStatus_WithMessage(res,200,res.json(data))
 };

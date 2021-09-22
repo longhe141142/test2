@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"_id\":\"1d42zzz\",\n    \"UseName\":\"lk\",\n    \"Password\":\"1232\",\n    \"Age\":3,\n    \"Email\":\"longnt1@gmail.com\",\n    \"Phone\":\"02545554\",\n    \"Address\":\"129-ltv\",\n    \"IsActive\":0\n,\n    \"mail\":\"longnthe141142@fpt.edu.vn\"\n}",
+					"raw": "{\n    \"UseName\":\"lksss\",\n    \"Password\":\"l777\",\n    \"Age\":3,\n    \"Email\":\"longnt1@999.com\",\n    \"Phone\":\"02545554\",\n    \"Address\":\"129-ltv\",\n    \"IsActive\":0,\n    \"customer\": {\n       \"PaymentMethod\":1,\n       \"IsActive\":0\n    },\n    \"mail\":\"pxz41brxc@gmail.com\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -119,6 +119,37 @@
 				"method": "GET",
 				"header": [],
 				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "create user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "active",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/user/active/6149f7f90492e3e1bf3dc8c6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"active",
+						"6149f7f90492e3e1bf3dc8c6"
+					]
+				}
 			},
 			"response": []
 		}

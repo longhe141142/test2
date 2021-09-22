@@ -1,7 +1,6 @@
 module.exports = (mongoose) => {
     var schema = mongoose.Schema(
       {
-        _id: String,
         Name: String,
         ProductId: {
           type: mongoose.Schema.Types.ObjectId,

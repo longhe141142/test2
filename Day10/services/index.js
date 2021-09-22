@@ -4,6 +4,8 @@ const { validateId } = require("../model/helper/schema.validate");
 const { authSchema } = require("../helper/authen");
 const handleErr = require("../middleware/err");
 const { ErrorHandler } = require("../middleware/Error/ErrHandle");
+const { ObjectId } = require("mongodb");
+const { mkdirSync, deleFIle } = require("../helper/file_interact");
 
 const service = {
   user_service: {
@@ -16,7 +18,7 @@ const service = {
         await session.withTransaction(async () => {
           // console.log("errx998")
           // create user.
-          const { customer, ...dataOmit } = obj;
+          const { customer, mail, ...dataOmit } = obj;
 
           const User = await db.user.create([dataOmit], { session });
 
@@ -221,7 +223,7 @@ const service = {
           console.log(Order[0]._id);
           for (const val of list) {
             val.order_details.OrderId = Order[0]._id;
-            val.order_details.Phone = Order[0].Phone
+            val.order_details.Phone = Order[0].Phone;
           }
           // console.log(order_details[0].OrderId)
           // const Order_details = await db.order_details.create([...list], {
@@ -230,7 +232,7 @@ const service = {
           const Order_details = await db.order_details.create(
             list.map((val) => {
               // console.log("Error 404:",val.order_details)
-              return val.order_details
+              return val.order_details;
             }),
             {
               session,
@@ -238,9 +240,9 @@ const service = {
           );
 
           Order[0].set({
-            totalPrice: Order_details.map(
-              val => val.totalPrice
-            ).reduce((acc,curr)=>acc+curr)
+            totalPrice: Order_details.map((val) => val.totalPrice).reduce(
+              (acc, curr) => acc + curr
+            ),
           });
           await Order[0].save({ session });
 
@@ -249,14 +251,191 @@ const service = {
             order_details: Order_details,
           };
 
-          console.log("total:",Order[0].totalPrice)
-
+          console.log("total:", Order[0].totalPrice);
 
           // console.log(data.data)
         });
         await session.endSession();
+        return data.data || new Error("Error");
       } catch (error) {
         console.log(error);
+        return error;
+      }
+    },
+    getCus: async (orderid) => {
+      return await db.order
+        .aggregate(
+          [
+            {
+              $lookup: {
+                from: "customer",
+                localField: "CustomerId",
+                foreignField: "_id",
+                as: "customer",
+              },
+            },
+            {
+              $match: {
+                _id: new ObjectId(orderid),
+              },
+            },
+          ],
+          "adminID roomID roomName users"
+        )
+        .then((data) => data[0].customer[0])
+        .catch((err) => err);
+    },
+    getEmailCus: async (orderid) => {
+      return await db.order
+        .aggregate([
+          {
+            $lookup: {
+              from: "customer",
+              localField: "CustomerId",
+              foreignField: "_id",
+              as: "customer",
+            },
+          },
+          {
+            $match: {
+              _id: new ObjectId(orderid),
+            },
+          },
+          {
+            $lookup: {
+              from: "user",
+              localField: "customer.UserId",
+              foreignField: "_id",
+              as: "user",
+            },
+          },
+          {
+            $group: {
+              _id: {
+                email: "$user.Email",
+              },
+              fieldN: {
+                $addToSet: "$customer",
+              },
+            },
+          },
+        ])
+        .then((data) => data[0]._id.email[0]);
+    },
+    paging: async (_skip, _limit) => {
+      return await db.order.aggregate([
+        {
+          $lookup: {
+            from: "order_details",
+            localField: "_id",
+            foreignField: "OrderId",
+            as: "order_details",
+          },
+        },
+        {
+          $skip: _skip,
+        },
+        {
+          $limit: _limit,
+        },
+      ]);
+    },
+    delete: async (order_id) => {
+      const session = await db.mongoose.startSession();
+      let log;
+      try {
+        await session.withTransaction(async () => {
+          let order = await db.order.findById(order_id);
+          order.set({
+            IsDeleted: 1,
+          });
+          await order.save({ session });
+          await db.order_details.deleteMany({ OrderId: order_id }, { session });
+          log = order;
+        });
+        session.endSession();
+        return log;
+      } catch (err) {
+        return err;
+      }
+    },
+  },
+  ProductService: {
+    createProduct: async (obj, images) => {
+      let data = {};
+      console.log(images);
+      try {
+        let session = await db.mongoose.startSession();
+        await session.withTransaction(async () => {
+          let product = await db.product.create([obj], { session });
+          let PRODUCT_IMAGES = [];
+          images.map((acc, curr) => {
+            PRODUCT_IMAGES.push({
+              ProductId: product[0]._id,
+              Name: curr.filename,
+              Url: curr.path,
+            });
+          });
+
+          let productimages = await db.product_images.create(
+            [...PRODUCT_IMAGES],
+            { session }
+          );
+          data.product = product[0];
+          data.product_images = productimages;
+        });
+        session.endSession();
+        return data || new Error("failed!");
+      } catch (error) {
+        return error;
+      }
+    },
+    updateProduct: async (id, obj, images) => {
+      let data = {};
+
+      try {
+        let session = await db.mongoose.startSession();
+        await session.withTransaction(async () => {
+          console.log("Dasasd");
+
+          let [product] = await Promise.all([
+            await db.product.findOne({ _id: id }),
+          ]);
+
+         
+          product.set(obj);
+          await product.save({ session });
+          
+          data.product = product;
+          console.log("product", product);
+          if (!images) {
+            db.product_images.deleteMany(
+              {
+                ProductId: id,
+              },
+              { session }
+            );
+            let PRODUCT_IMAGES = [];
+            images.map((acc, curr) => {
+              PRODUCT_IMAGES.push({
+                ProductId: product[0]._id,
+                Name: curr.filename,
+                Url: curr.path,
+              });
+            });
+
+            let productimages = await db.product_images.create(
+              [...PRODUCT_IMAGES],
+              { session }
+            );
+            data.product_images = productimages;
+          }
+        });
+
+        session.endSession();
+        return data || new Error("Failed");
+      } catch (error) {
+        return error;
       }
     },
   },
