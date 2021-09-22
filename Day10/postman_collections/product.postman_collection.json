@@ -59,12 +59,7 @@
 							"value": "3",
 							"type": "text"
 						}
-					],
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					]
 				},
 				"url": {
 					"raw": "http://localhost:3000/api/product/uploadImages",
@@ -79,6 +74,87 @@
 						"uploadImages"
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/home/he141142/Pictures/Screenshot from 2021-09-21 11-36-34.png",
+							"disabled": true
+						},
+						{
+							"key": "images",
+							"type": "file",
+							"src": [
+								"/home/he141142/Pictures/Screenshot from 2021-09-22 09-35-38.png",
+								"/home/he141142/Pictures/Screenshot from 2021-09-21 18-43-55.png",
+								"/home/he141142/Pictures/Screenshot from 2021-09-20 14-03-00.png",
+								"/home/he141142/Pictures/Screenshot from 2021-09-16 23-17-12.png"
+							]
+						},
+						{
+							"key": "Name",
+							"value": "iphone",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "new product",
+							"type": "text"
+						},
+						{
+							"key": "Price",
+							"value": "200",
+							"type": "text"
+						},
+						{
+							"key": "Tax",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "IsDeleted",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "Discount",
+							"value": "3",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/product/uploadImages",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"product",
+						"uploadImages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "paging",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
 			},
 			"response": []
 		}

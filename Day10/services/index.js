@@ -402,10 +402,9 @@ const service = {
             await db.product.findOne({ _id: id }),
           ]);
 
-         
           product.set(obj);
           await product.save({ session });
-          
+
           data.product = product;
           console.log("product", product);
           if (!images) {
@@ -437,6 +436,24 @@ const service = {
       } catch (error) {
         return error;
       }
+    },
+    getList: async (_skip, _limit) => {
+      return await db.product.aggregate([
+        {
+          $lookup: {
+            from: "product_images",
+            localField: "_id",
+            foreignField: "ProductId",
+            as: "product_images",
+          },
+        },
+        {
+          $skip: _skip,
+        },
+        {
+          $limit: _limit,
+        },
+      ]);
     },
   },
 };
