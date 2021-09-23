@@ -21,3 +21,9 @@ module.exports = (req,res,User,process) => {
         })
     )
 }
+
+// jwt.sign({
+//     exp: Math.floor(Date.now() / 1000) + (6000 * 60),
+//     data: {usename,password},
+//     // algorithm: 'RS256'
+//   }, process.env.TOKEN)
